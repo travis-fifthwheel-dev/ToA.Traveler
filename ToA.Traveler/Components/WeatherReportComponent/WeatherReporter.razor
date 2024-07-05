@@ -1,0 +1,76 @@
+﻿@inherits WeatherReporterBase
+
+@if (WeatherReport is null)
+{
+    <MudPaper Class="mb-3 pa-4">
+
+        <MudAlert Severity="Severity.Info">
+            Waiting on the weather report.
+        </MudAlert>
+    </MudPaper>
+}
+else
+{
+    <MudPaper Class="mb-3 pa-4">
+
+        <MudText Typo="Typo.h5" GutterBottom>
+            Temperature
+        </MudText>
+
+        @foreach (var display in WeatherReport.TemperatureDisplay)
+        {
+            <MudText Typo="Typo.body1">
+                &bull; @display
+            </MudText>
+        }
+
+    </MudPaper>
+    <MudPaper Class="mb-3 pa-4">
+
+        <MudText Typo="Typo.h5" GutterBottom>
+            Wind
+        </MudText>
+
+        @foreach (var display in WeatherReport.WindDisplay)
+        {
+            <MudText Typo="Typo.body1">
+                &bull; @display
+            </MudText>
+        }
+    </MudPaper>
+    <MudPaper Class="mb-3 pa-4">
+
+        <MudText Typo="Typo.h5" GutterBottom>
+            Precipitation
+        </MudText>
+
+        @foreach (var display in WeatherReport.PrecipitationDisplay)
+        {
+            <MudText Typo="Typo.body1">
+                &bull; @display
+            </MudText>
+        }
+
+    </MudPaper>
+
+    @if (WeatherReport.IsTropicalStorm)
+    {
+        <MudPaper Class="mb-3 pa-4">
+            <MudText Typo="Typo.h5" GutterBottom>
+                Tropical Storm
+            </MudText>
+
+            @foreach (var display in WeatherReport.TropicalStormDisplay)
+            {
+                <MudText Typo="Typo.body1">
+                    &bull; @display
+                </MudText>
+            }
+        </MudPaper>
+    }
+}
+
+<MudButton OnClick="RollWeather" Variant="Variant.Filled" Color="Color.Info" FullWidth Class="mb-3">
+    Re-Roll Weather
+</MudButton>
+

@@ -1,0 +1,34 @@
+﻿@inherits ForagerOutcomeBase
+
+@if (ForageOutcomes is not null)
+{
+    foreach (var outcome in ForageOutcomes)
+    {
+        <MudPaper Class="pa-4 mb-3">
+            <MudText Typo="Typo.h5" GutterBottom>
+                Foraging Outcome - @outcome.ForagerName
+            </MudText>
+            @if (outcome.IsSuccess)
+            {
+                <MudText Typo="Typo.body1">
+                    <strong>Food:</strong> @outcome.PoundsOfFood lbs
+                </MudText>
+                <MudText Typo="Typo.body1">
+                    <strong>Water:</strong> @outcome.GallonsOfWater gallons
+                </MudText>
+                if(outcome.SpecialPlant is not null)
+                {
+                    <MudText Typo="Typo.body1">
+                        <strong>Special Plant Found:</strong> @outcome.SpecialPlant.Name
+                    </MudText>
+                }
+            }
+            else
+            {
+                <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center">
+                    Forage Check Failed
+                </MudAlert>
+            }
+        </MudPaper>
+    }
+}

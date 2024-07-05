@@ -1,0 +1,16 @@
+﻿@inherits ExhaustionBase
+
+@if(TheParty.Any(x => x.Exhaustion > 0))
+{
+    <MudPaper Class="pa-4 mb-3">
+        <MudText Typo="Typo.h5" GutterBottom>
+            Party Exhaustion
+        </MudText>
+        @foreach(var character in TheParty.OrderBy(x => x.Name))
+        {
+            <MudText Typo="Typo.body1">
+                <strong>@character.Name: </strong> @character.Exhaustion
+            </MudText>
+        }
+    </MudPaper>
+}

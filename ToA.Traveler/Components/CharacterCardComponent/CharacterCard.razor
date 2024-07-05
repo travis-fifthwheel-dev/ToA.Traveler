@@ -1,0 +1,22 @@
+﻿@inherits CharacterCardBase
+
+<MudCard>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">@Character.Name</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Error">
+                <MudMenuItem OnClick="() => SwapArmor(ArmorType.None)">Swap Armor (None)</MudMenuItem>
+                <MudMenuItem OnClick="() => SwapArmor(ArmorType.Light)">Swap Armor (Light)</MudMenuItem>
+                <MudMenuItem OnClick="() => SwapArmor(ArmorType.Medium)">Swap Armor (Medium)</MudMenuItem>
+                <MudMenuItem OnClick="() => SwapArmor(ArmorType.Heavy)">Swap Armor (Heavy)</MudMenuItem>
+            </MudMenu>
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudText><strong>Travel Job: </strong>@Character.Job</MudText>
+        <MudText><strong>Armor Type: </strong>@Character.Armor</MudText>
+        <MudText><strong>Exhaustion: </strong>@Character.Exhaustion</MudText>
+    </MudCardContent>
+</MudCard>

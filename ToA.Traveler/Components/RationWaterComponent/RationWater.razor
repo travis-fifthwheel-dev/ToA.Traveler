@@ -1,0 +1,59 @@
+﻿@inherits RationWaterBase
+
+<MudPaper Class="pa-4 mb-3">
+    <MudText Typo="Typo.h5" GutterBottom>
+        Food & Water
+    </MudText>
+    <MudGrid>
+        @foreach (var character in State.Value.TheParty.OrderBy(x => x.Name))
+        {
+            <MudItem xs="4" Class="d-flex justify-end align-content-center">
+                <MudGrid Class="d-flex justify-start align-content-center">
+                    <MudItem xs="6">
+                        <MudIconButton OnClick="() => Water(character.Name)" Color="Color.Info" Icon="@Icons.TwoTone.WaterDrop" Size="Size.Large" />
+                    </MudItem>
+                    <MudItem xs="6">
+                        @if (character.ConsumedWater >= RequiredWater)
+                        {
+                            <MudAlert NoIcon Severity="Severity.Success" ContentAlignment="HorizontalAlignment.Center">
+                                @character.ConsumedWater
+                            </MudAlert>
+                        }
+                        else
+                        {
+                            <MudAlert NoIcon Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center">
+                                @character.ConsumedWater
+                            </MudAlert>
+                        }
+                    </MudItem>
+                </MudGrid>
+            </MudItem>
+            <MudItem xs="4">
+                <MudAlert NoIcon Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Center">
+                    @character.Name
+                </MudAlert>
+            </MudItem>
+            <MudItem xs="4" Class="d-flex justify-start align-content-center">
+                <MudGrid Class="d-flex justify-start align-content-center">
+                    <MudItem xs="6">
+                        @if (character.ConsumedRations >= 1)
+                        {
+                            <MudAlert NoIcon Severity="Severity.Success" ContentAlignment="HorizontalAlignment.Center">
+                                @character.ConsumedRations
+                            </MudAlert>
+                        }
+                        else
+                        {
+                            <MudAlert NoIcon Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center">
+                                @character.ConsumedRations
+                            </MudAlert>
+                        }
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudIconButton OnClick="() => Food(character.Name)" Color="Color.Warning" Icon="@Icons.Custom.Uncategorized.Baguette" Size="Size.Large" />
+                    </MudItem>
+                </MudGrid>
+            </MudItem>
+        }
+    </MudGrid>
+</MudPaper>

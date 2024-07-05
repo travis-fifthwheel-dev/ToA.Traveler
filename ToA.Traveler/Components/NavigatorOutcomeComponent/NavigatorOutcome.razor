@@ -1,0 +1,56 @@
+﻿@inherits NavigatorOutcomeBase
+
+@if (NavigationOutcome is not null)
+{
+    <MudPaper Class="pa-4 mb-3">
+        <MudText Typo="Typo.h5" GutterBottom>
+            Navigation Outcome
+        </MudText>
+        @if (NavigationOutcome.IsPartyLost)
+        {
+            <MudText Typo="Typo.body1">
+                The party is <strong>lost</strong>.
+            </MudText>
+            <MudText Typo="Typo.body1">
+                <strong>Do not</strong> reveal their actual location.
+            </MudText>
+            <MudText Typo="Typo.body1">
+                <strong>Do not</strong> remove the hex's mask.
+            </MudText>
+        }
+        else
+        {
+            <MudText Typo="Typo.body1">
+                The party is <strong>not lost</strong>.
+            </MudText>
+            <MudText Typo="Typo.body1">
+                <strong>Reveal</strong> their actual location.
+            </MudText>
+            @if (NavigationOutcome.UsedCartographers || NavigationOutcome.IsNavigatorOutlander)
+            {
+                <MudText Typo="Typo.body1">
+                    <strong>Remove</strong> the hex's mask.
+                </MudText>
+            }
+            else
+            {
+                <MudText Typo="Typo.body1">
+                    <strong>Do not</strong> remove the hex's mask.
+                </MudText>
+            }
+        }
+
+        @if (NavigationOutcome.HexCount > 1)
+        {
+            <MudText Typo="Typo.body1">
+                The party moves <strong>@NavigationOutcome.HexCount hexes</strong> to the <strong>@NavigationOutcome.TravelDirection</strong>.
+            </MudText>
+        }
+        else
+        {
+            <MudText Typo="Typo.body1">
+                The party moves <strong>@NavigationOutcome.HexCount hex</strong> to the <strong>@NavigationOutcome.TravelDirection</strong>.
+            </MudText>
+        }
+    </MudPaper>
+}

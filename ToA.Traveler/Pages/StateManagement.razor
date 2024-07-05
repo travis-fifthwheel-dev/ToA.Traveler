@@ -1,0 +1,17 @@
+﻿@page "/state-management"
+@using ToA.Traveler.Services
+@inject StatePersistenceService StatePersistenceService
+
+<h3>State Management</h3>
+
+<MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.TwoTone.Delete" OnClick="ClearState">
+    Clear State
+</MudButton>
+
+@code {
+    private async Task ClearState()
+    {
+        await StatePersistenceService.ClearStateAsync();
+        // Optionally, reload the page or re-initialize the state
+    }
+}

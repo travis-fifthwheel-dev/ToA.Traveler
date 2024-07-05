@@ -1,0 +1,79 @@
+﻿@page "/"
+@using ToA.Traveler.Components.EncounterOutcomeComponent
+@using ToA.Traveler.Components.EndNavigationComponent
+@using ToA.Traveler.Components.ExhaustionComponent
+@using ToA.Traveler.Components.ForagerOutcomeComponent
+@using ToA.Traveler.Components.HydrationOutcomeComponent
+@using ToA.Traveler.Components.MakeCampComponent
+@using ToA.Traveler.Components.NavigatorComponent
+@using ToA.Traveler.Components.NavigatorOutcomeComponent
+@using ToA.Traveler.Components.RationWaterComponent
+@using ToA.Traveler.Components.StartDayComponent
+@using ToA.Traveler.Components.StartingLocationComponent
+@using ToA.Traveler.Components.StarvationOutcomeComponent
+@using ToA.Traveler.Components.TravelJobsComponent
+@using ToA.Traveler.Components.TropicalStormOutcomeComponent
+@using ToA.Traveler.Components.WeatherReportComponent
+
+@inherits HomeBase
+
+<PageTitle>TOA - Traveler</PageTitle>
+
+@if (Day > 0)
+{
+    <MudText Typo="Typo.h4" GutterBottom>
+        Chult Expedition - Day @Day
+    </MudText>
+}
+
+@if (IsDayEnded)
+{
+    <StartDay />
+}
+else
+{
+    <MudGrid>
+        <MudItem xs="7">
+            @if (!IsTraveling)
+            {
+                <MudButton OnClick="StartTravel" Variant="Variant.Filled" Color="Color.Info" FullWidth Class="mb-3">
+                    Start Travel
+                </MudButton>
+                <StartDay />
+            }
+            else
+            {
+                if (IsConfirmingTravelJobs)
+                {
+                    <TravelJobs />
+                }
+
+                if (IsConfirmingTravelSpecs)
+                {
+                    <Navigator />
+                }               
+
+                if (IsNavigating)
+                {
+                    <NavigatorOutcome />
+                    <EncounterOutcome />
+                    <ForageOutcome />
+                    <EndNavigation />
+                }
+                else
+                {
+                    <HydrationOutcome />
+                    <StarvationOutcome />
+                    <TropicalStormOutcome />
+                    <StartDay />
+                }
+            }
+        </MudItem>
+        <MudItem xs="5">
+            <StartingLocation />
+            <WeatherReporter />
+            <RationWater />
+            <Exhaustion />
+        </MudItem>
+    </MudGrid>
+}

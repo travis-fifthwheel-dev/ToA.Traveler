@@ -1,0 +1,41 @@
+﻿@inherits TravelJobsBase
+
+<MudPaper Class="mb-3 pa-4">
+    <MudText Typo="Typo.h5" GutterBottom>
+        Travel Jobs
+    </MudText>
+    <MudDropContainer T="Character" Items="TheParty" ItemsSelector="@((item,dropzone) => item.JobSelector == dropzone)" ItemDropped="ItemUpdated" CanDropClass="mud-border-success" NoDropClass="mud-border-error" Class="d-flex flex-column flex-grow-1 mb-3">
+        <ChildContent>
+            <div class="d-flex flex-wrap justify-space-between">
+                <MudDropZone T="Character" Identifier="Navigator" CanDrop="@((item) => TheParty.Count(x => x.Job == TravelJob.Navigator) == 0)" Class="rounded-lg border-2 border-dashed mud-border-lines-default pa-4 ma-2 flex-grow-1">
+                    <MudText Typo="Typo.button" Class="ma-2">Navigator</MudText>
+                </MudDropZone>
+                <MudDropZone T="Character" Identifier="Cartographer" CanDrop="@((item) => item.IsCartographerProficient || item.IsOutlander)" Class="rounded-lg border-2 border-dashed mud-border-lines-default pa-4 ma-2 flex-grow-1">
+                    <MudText Typo="Typo.button" Class="ma-2">Cartographer</MudText>
+                </MudDropZone>
+                <MudDropZone T="Character" Identifier="Forager" CanDrop="@((item) => true)" Class="rounded-lg border-2 border-dashed mud-border-lines-default pa-4 ma-2 flex-grow-1">
+                    <MudText Typo="Typo.button" Class="ma-2">Forager</MudText>
+                </MudDropZone>
+                <MudDropZone T="Character" Identifier="Scout" CanDrop="@((item) => true)" Class="rounded-lg border-2 border-dashed mud-border-lines-default pa-4 ma-2 flex-grow-1">
+                    <MudText Typo="Typo.button" Class="ma-2">Scout</MudText>
+                </MudDropZone>
+            </div>
+        </ChildContent>
+        <ItemRenderer>
+            <MudPaper Elevation="25" Class="pa-4 ma-2">@context.Name</MudPaper>
+        </ItemRenderer>
+    </MudDropContainer>
+    
+    @if (NavigatorAssigned)
+    {
+        <MudButton OnClick="TravelJobsConfirmed" Variant="Variant.Filled" Color="Color.Info" FullWidth>
+            Travel Jobs Confirmed
+        </MudButton>
+    }
+    else
+    {
+        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center">
+            The party needs a <strong>Navigator</strong>.
+        </MudAlert>
+    }
+</MudPaper>

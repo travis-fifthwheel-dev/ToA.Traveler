@@ -1,0 +1,177 @@
+﻿@inherits EncounterOutcomeBase
+
+@if (EncounterOutcomes is not null)
+{
+
+    if (EncounterOutcomes.ElementAt(0).IsEncounter)
+    {
+        <MudPaper Class="pa-4 mb-3">
+            <MudText Typo="Typo.h5" GutterBottom>
+                Dawn Encounter
+            </MudText>
+            <MudText Typo="Typo.body1" Class="mb-3">
+                <strong>@EncounterOutcomes.ElementAt(0).Terrain Encounter Table Roll:</strong> @EncounterOutcomes.ElementAt(0).EncounterTableRoll
+            </MudText>
+            @if (EncounterOutcomes.ElementAt(0).CanHide!.Value)
+            {
+                <MudAlert Severity="Severity.Warning" Class="mb-3">
+                    The party is traveling cautiously. They are able to hide.
+                </MudAlert>
+            }
+            else if (EncounterOutcomes.ElementAt(0).ThreatSpotted!.Value)
+            {
+                <MudAlert Severity="Severity.Warning" Class="mb-3">
+                    A scout spots the threat ahead of time. The party is able to avoid this encounter.
+                </MudAlert>
+            }
+            else if (State.Value.Foragers.Any())
+            {
+                if (EncounterOutcomes.ElementAt(0).IsPartyTargeted!.Value)
+                {
+                    <MudAlert Severity="Severity.Error" Class="mb-3">
+                        The main party is targeted by an encounter!
+                    </MudAlert>
+                }
+                else
+                {
+                    <MudAlert Severity="Severity.Error" Class="mb-3">
+                        The foragers are targeted by an encounter!
+                    </MudAlert>
+                }
+
+                foreach (var encounterDelay in EncounterOutcomes.ElementAt(0).EncounterDelay!)
+                {
+                    <MudAlert Severity="Severity.Warning" Class="mb-3">
+                        @encounterDelay.CharacterName is delayed by @encounterDelay.Delay rounds!
+                    </MudAlert>
+                }
+            }
+        </MudPaper>
+    }
+    else
+    {
+        <MudPaper Class="pa-4 mb-3">
+            <MudText Typo="Typo.h5" GutterBottom>
+                Dawn Encounter
+            </MudText>
+            <MudAlert Severity="Severity.Info" Class="mb-3">
+                The party is able to travel peacefully.
+            </MudAlert>
+        </MudPaper>
+    }
+
+    if (EncounterOutcomes.ElementAt(1).IsEncounter)
+    {
+        <MudPaper Class="pa-4 mb-3">
+            <MudText Typo="Typo.h5" GutterBottom>
+                Day Encounter
+            </MudText>
+            <MudText Typo="Typo.body1" Class="mb-3">
+                <strong>@EncounterOutcomes.ElementAt(1).Terrain Encounter Table Roll:</strong> @EncounterOutcomes.ElementAt(1).EncounterTableRoll
+            </MudText>
+            @if (EncounterOutcomes.ElementAt(1).CanHide!.Value)
+            {
+                <MudAlert Severity="Severity.Warning" Class="mb-3">
+                    The main party is targeted by an encounter!
+                </MudAlert>
+            }
+            else if (EncounterOutcomes.ElementAt(1).ThreatSpotted!.Value)
+            {
+                <MudAlert Severity="Severity.Warning" Class="mb-3">
+                    A scout spots the threat ahead of time. The party is able to avoid this encounter.
+                </MudAlert>
+            }
+            else if (State.Value.Foragers.Any())
+            {
+                if (EncounterOutcomes.ElementAt(1).IsPartyTargeted!.Value)
+                {
+                    <MudAlert Severity="Severity.Error" Class="mb-3">
+                        The party is targeted by an encounter!
+                    </MudAlert>
+                }
+                else
+                {
+                    <MudAlert Severity="Severity.Error" Class="mb-3">
+                        The foragers are targeted by an encounter!
+                    </MudAlert>
+                }
+
+                foreach (var encounterDelay in EncounterOutcomes.ElementAt(1).EncounterDelay!)
+                {
+                    <MudAlert Severity="Severity.Warning" Class="mb-3">
+                        @encounterDelay.CharacterName is delayed by @encounterDelay.Delay rounds!
+                    </MudAlert>
+                }
+            }
+        </MudPaper>
+    }
+    else
+    {
+        <MudPaper Class="pa-4 mb-3">
+            <MudText Typo="Typo.h5" GutterBottom>
+                Day Encounter
+            </MudText>
+            <MudAlert Severity="Severity.Info" Class="mb-3">
+                The party is able to travel peacefully.
+            </MudAlert>
+        </MudPaper>
+    }
+
+    if (EncounterOutcomes.ElementAt(2).IsEncounter)
+    {
+        <MudPaper Class="pa-4 mb-3">
+            <MudText Typo="Typo.h5" GutterBottom>
+                Dusk Encounter
+            </MudText>
+            <MudText Typo="Typo.body1" Class="mb-3">
+                <strong>@EncounterOutcomes.ElementAt(2).Terrain Encounter Table Roll:</strong> @EncounterOutcomes.ElementAt(2).EncounterTableRoll
+            </MudText>
+            @if (EncounterOutcomes.ElementAt(2).CanHide!.Value)
+            {
+                <MudAlert Severity="Severity.Warning" Class="mb-3">
+                    The party is traveling cautiously. They are able to hide.
+                </MudAlert>
+            }
+            else if (EncounterOutcomes.ElementAt(2).ThreatSpotted!.Value)
+            {
+                <MudAlert Severity="Severity.Warning" Class="mb-3">
+                    A scout spots the threat ahead of time. The party is able to avoid this encounter.
+                </MudAlert>
+            }
+            else if (State.Value.Foragers.Any())
+            {
+                if (EncounterOutcomes.ElementAt(2).IsPartyTargeted!.Value)
+                {
+                    <MudAlert Severity="Severity.Error" Class="mb-3">
+                        The main party is targeted by an encounter!
+                    </MudAlert>
+                }
+                else
+                {
+                    <MudAlert Severity="Severity.Error" Class="mb-3">
+                        The foragers are targeted by an encounter!
+                    </MudAlert>
+                }
+
+                foreach (var encounterDelay in EncounterOutcomes.ElementAt(2).EncounterDelay!)
+                {
+                    <MudAlert Severity="Severity.Warning" Class="mb-3">
+                        @encounterDelay.CharacterName is delayed by @encounterDelay.Delay rounds!
+                    </MudAlert>
+                }
+            }
+        </MudPaper>
+    }
+    else
+    {
+        <MudPaper Class="pa-4 mb-3">
+            <MudText Typo="Typo.h5" GutterBottom>
+                Dusk Encounter
+            </MudText>
+            <MudAlert Severity="Severity.Info" Class="mb-3">
+                The party is able to travel peacefully.
+            </MudAlert>
+        </MudPaper>
+    }
+
+}

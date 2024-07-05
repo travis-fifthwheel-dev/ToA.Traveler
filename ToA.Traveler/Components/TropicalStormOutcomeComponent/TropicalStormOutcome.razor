@@ -1,0 +1,28 @@
+﻿@inherits TropicalStormOutcomeBase
+
+@if (IsTropicalStorm && TropicalStormOutcomes is not null)
+{
+    <MudPaper Class="pa-4 mb-3">
+        <MudText Typo="Typo.h5" GutterBottom>
+            Tropical Storm Outcomes
+        </MudText>
+        @if (TropicalStormOutcomes.Any(x => x.ExhaustionGained > 0))
+        {
+            foreach (var outcome in TropicalStormOutcomes)
+            {
+                if (outcome.ExhaustionGained > 0)
+                {
+                    <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" Class="mb-2">
+                        @outcome.CharacterName gains @outcome.ExhaustionGained exhaustion from traveling through the storm!
+                    </MudAlert>
+                }
+            }
+        }
+        else
+        {
+            <MudAlert Severity="Severity.Success" ContentAlignment="HorizontalAlignment.Center" Class="mb-2">
+                No party members are starving.
+            </MudAlert>
+        }
+    </MudPaper>
+}

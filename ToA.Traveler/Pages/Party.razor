@@ -1,0 +1,15 @@
+﻿@page "/party"
+
+@using ToA.Traveler.Components.CharacterCardComponent
+@inherits PartyBase
+
+<h3>The Party</h3>
+
+<MudGrid>
+    @foreach(var character in TheParty)
+    {
+        <MudItem xs="3">
+            <CharacterCard Character="@character" />
+        </MudItem>
+    }
+</MudGrid>

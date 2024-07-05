@@ -1,0 +1,28 @@
+﻿@inherits HydrationOutcomesBase
+
+@if (HydrationOutcomes is not null)
+{
+    <MudPaper Class="pa-4 mb-3">
+        <MudText Typo="Typo.h5" GutterBottom>
+            Hydration Outcomes
+        </MudText>
+        @if (HydrationOutcomes.Any(x => !x.IsHydrated && x.ExhaustionGained > 0))
+        {
+            foreach (var outcome in HydrationOutcomes)
+            {
+                if (!outcome.IsHydrated && outcome.ExhaustionGained > 0)
+                {
+                    <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" Class="mb-2">
+                        @outcome.CharacterName is dehydrated and gains @outcome.ExhaustionGained exhaustion!
+                    </MudAlert>
+                }
+            }
+        }
+        else
+        {
+            <MudAlert Severity="Severity.Success" ContentAlignment="HorizontalAlignment.Center" Class="mb-2">
+                All party members are hydrated.
+            </MudAlert>
+        }
+    </MudPaper>
+}

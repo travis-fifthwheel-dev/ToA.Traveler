@@ -1,0 +1,75 @@
+﻿@inherits NavigatorBase
+
+@if (Navigator is not null)
+{
+    <MudPaper Class="mb-3 pa-4">
+        <MudText Typo="Typo.h5" GutterBottom>
+            Navigation
+        </MudText>
+        <MudGrid>
+            <MudItem xs="4">
+                <MudDropContainer T="TravelerDirectionDropItem"
+                                  Items="DropItems"
+                                  CanDropClass="mud-border-info"
+                                  NoDropClass="mud-border-error"
+                                  CanDrop="@((item, identifier) => identifier != "10" && identifier != "11" && identifier != "12")"
+                                  ItemsSelector="@((item, dropzone) => item.Identifier == dropzone)"
+                                  ItemDropped="ItemUpdated">
+                    <ChildContent>
+                        @for (int r = 0; r < 3; r++)
+                        {
+                            var row = r.ToString();
+                            <div class="d-flex">
+                                @for (int c = 0; c < 3; c++)
+                                {
+                                    var col = c.ToString();
+                                    <MudDropZone T="TravelerDirectionDropItem"
+                                                 Identifier="@($"{row}{col}")"
+                                                 DraggingClass="mud-theme-success"
+                                                 Class="d-flex justify-center align-center border-2 border-solid docs-gray-bg mud-border-lines-default"
+                                                 Style="height: 64px; width: 64px;" />
+                                }
+                            </div>
+                        }
+                    </ChildContent>
+                    <ItemRenderer>
+                        <div class="d-flex justify-center align-center flex-grow-1">
+                            <MudIcon Icon="@context.Icon" Color="Color.Info" Size="Size.Large" />
+                        </div>
+                    </ItemRenderer>
+                </MudDropContainer>
+            </MudItem>
+            <MudItem xs="8">
+                <MudTextField Value="@($"+{Navigator.SurvivalModifier}")" Label="@($"{Navigator.Name}'s Survival Modifier")" Variant="Variant.Outlined" HideSpinButtons Class="mb-3" ReadOnly />
+
+                @if (IsForcedSlowPace)
+                {
+                    <MudAlert Severity="Severity.Warning" Class="mb-3">
+                        Forced to travel at a slow pace due to exhaustion.
+                    </MudAlert>
+                }
+                else
+                {
+                    <MudSelect T="TravelPace" @bind-Value="Pace" Label="Travel Pace" Variant="Variant.Outlined" Class="mb-3">
+                        @foreach (TravelPace type in Enum.GetValues(typeof(TravelPace)))
+                        {
+                            <MudSelectItem Value="type">@type</MudSelectItem>
+                        }
+                    </MudSelect>
+                }
+
+                <MudSelect T="TerrainType" @bind-Value="Terrain" Label="Terrain" Variant="Variant.Outlined" Class="mb-3">
+                    @foreach (TerrainType type in Enum.GetValues(typeof(TerrainType)))
+                    {
+                        <MudSelectItem Value="type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12">
+                <MudButton OnClick="StartNavigation" Variant="Variant.Filled" Color="Color.Info" FullWidth>
+                    Start Navigation
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+}
